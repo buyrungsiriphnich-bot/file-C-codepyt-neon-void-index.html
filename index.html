@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="color-scheme" content="dark" />
+<title>NEON VOID — arcade shooter</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="stage" id="stage">
+      <canvas id="game" width="960" height="640" aria-label="เกมยิงยานอวกาศ NEON VOID"></canvas>
+
+      <!-- ============ HUD ============ -->
+      <div class="hud" id="hud" aria-hidden="true">
+        <div class="hud__row">
+          <div class="stat">
+            <span class="stat__label">SCORE</span>
+            <span class="stat__value" id="scoreValue">0</span>
+            <span class="combo" id="comboTag">×1</span>
+          </div>
+
+          <div class="stat stat--center">
+            <span class="stat__label">WAVE</span>
+            <span class="stat__value" id="waveValue">1</span>
+          </div>
+
+          <div class="stat stat--right">
+            <span class="stat__label">BEST</span>
+            <span class="stat__value stat__value--dim" id="bestValue">0</span>
+          </div>
+
+          <div class="hud__actions">
+            <button class="icon-btn" id="muteBtn" type="button" aria-label="เปิด/ปิดเสียง" title="เสียง (M)">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path class="ico-speaker" d="M4 9h3.5L13 4.5v15L7.5 15H4z" />
+                <path class="ico-waves" d="M16.5 8.2a5 5 0 0 1 0 7.6M19 5.5a8.6 8.6 0 0 1 0 13" />
+                <path class="ico-muted" d="M16.5 9.5l5 5m0-5l-5 5" />
+              </svg>
+            </button>
+            <button class="icon-btn" id="pauseBtn" type="button" aria-label="หยุดพัก" title="หยุดพัก (P)">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect class="ico-pause" x="6.5" y="5" width="4" height="14" rx="1" />
+                <rect class="ico-pause" x="13.5" y="5" width="4" height="14" rx="1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="boss" id="bossBar">
+          <div class="boss__label">VOID SENTINEL</div>
+          <div class="boss__track"><div class="boss__fill" id="bossFill"></div></div>
+        </div>
+
+        <div class="lives" id="lives"></div>
+      </div>
+
+      <div class="banner" id="banner" aria-live="polite"></div>
+
+      <!-- ============ TITLE ============ -->
+      <div class="overlay is-visible" id="titleScreen" data-screen="title">
+        <div class="panel">
+          <p class="eyebrow">ARCADE / ENDLESS</p>
+          <h1 class="logo">NEON<span>VOID</span></h1>
+          <p class="tagline">ยิงฝ่าวงล้อมในสุญญากาศ — เก็บคอมโบให้ต่อเนื่องเพื่อคูณคะแนน</p>
+
+          <button class="btn btn--primary" id="startBtn" type="button" autofocus>
+            เริ่มเล่น <kbd>ENTER</kbd>
+          </button>
+
+          <ul class="controls">
+            <li><span class="controls__key">เมาส์ / นิ้ว</span><span>บังคับยาน</span></li>
+            <li><span class="controls__key">WASD / ลูกศร</span><span>บังคับยาน</span></li>
+            <li><span class="controls__key">ยิงอัตโนมัติ</span><span>โฟกัสที่หลบอย่างเดียว</span></li>
+            <li><span class="controls__key">P · ESC</span><span>หยุดพัก</span></li>
+          </ul>
+
+          <p class="panel__foot">BEST <strong id="titleBest">0</strong></p>
+        </div>
+      </div>
+
+      <!-- ============ PAUSE ============ -->
+      <div class="overlay" id="pauseScreen" data-screen="pause">
+        <div class="panel panel--compact">
+          <p class="eyebrow">SYSTEM</p>
+          <h2 class="screen-title">หยุดพัก</h2>
+          <p class="tagline">กลับมาลุยต่อเมื่อพร้อม</p>
+          <button class="btn btn--primary" id="resumeBtn" type="button">เล่นต่อ</button>
+          <button class="btn btn--ghost" id="restartBtn" type="button">เริ่มใหม่</button>
+        </div>
+      </div>
+
+      <!-- ============ GAME OVER ============ -->
+      <div class="overlay" id="overScreen" data-screen="over">
+        <div class="panel panel--compact">
+          <p class="eyebrow eyebrow--danger">SIGNAL LOST</p>
+          <h2 class="screen-title">ยานถูกทำลาย</h2>
+
+          <div class="result">
+            <div class="result__cell">
+              <span class="stat__label">SCORE</span>
+              <span class="result__value" id="overScore">0</span>
+            </div>
+            <div class="result__cell">
+              <span class="stat__label">WAVE</span>
+              <span class="result__value" id="overWave">1</span>
+            </div>
+            <div class="result__cell">
+              <span class="stat__label">BEST</span>
+              <span class="result__value result__value--dim" id="overBest">0</span>
+            </div>
+          </div>
+
+          <p class="new-record" id="newRecord"> NEW RECORD </p>
+
+          <button class="btn btn--primary" id="retryBtn" type="button">ลองอีกครั้ง <kbd>R</kbd></button>
+        </div>
+      </div>
+    </div>
+
+    <p class="hint">
+      <span class="hint__dot"></span>
+      บนมือถือ: ลากนิ้วเพื่อบังคับยาน · ยิงอัตโนมัติ · เก็บไอเท็มเพื่ออัปเกรด
+    </p>
+  </div>
+
+  <script src="js/core.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/starfield.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/bullets.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/enemies.js"></script>
+  <script src="js/boss.js"></script>
+  <script src="js/powerups.js"></script>
+  <script src="js/waves.js"></script>
+  <script src="js/hud.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
