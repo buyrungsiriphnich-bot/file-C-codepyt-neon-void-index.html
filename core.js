@@ -47,7 +47,7 @@
     comboPerStep: 4,
     maxMultiplier: 6,
 
-    powerupDropChance: 0.14,
+    powerupDropChance: 0.30,
     powerupFallSpeed: 78,
     powerupLifetime: 11,
     powerupRadius: 15,
