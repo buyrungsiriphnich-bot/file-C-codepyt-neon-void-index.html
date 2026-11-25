@@ -18,10 +18,10 @@
       this.y = -120;
       this.baseX = WORLD.width / 2;
       this.radius = 66;
-      this.maxHp = 210 + wave * 460;
+      this.maxHp = 2100 + wave * 460;
       this.hp = this.maxHp;
       this.color = NV.COLORS.magenta;
-      this.score = 4000 + wave * 900;
+      this.score = 40000 + wave * 900;
       this.contactDamage = 10;
       this.dead = false;
       this.escaped = false;
