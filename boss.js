@@ -18,11 +18,11 @@
       this.y = -120;
       this.baseX = WORLD.width / 2;
       this.radius = 66;
-      this.maxHp = 210 + wave * 46;
+      this.maxHp = 210 + wave * 460;
       this.hp = this.maxHp;
       this.color = NV.COLORS.magenta;
-      this.score = 400 + wave * 90;
-      this.contactDamage = 1;
+      this.score = 4000 + wave * 900;
+      this.contactDamage = 10;
       this.dead = false;
       this.escaped = false;
       this.isBoss = true;
@@ -43,7 +43,7 @@
 
     update(dt, game) {
       this.t += dt;
-      this.flash = Math.max(0, this.flash - dt * 3.5);
+      this.flash = Math.max(0, this.flash - dt * 6.5);
       this.spin += dt * 0.8;
 
       if (this.entering) {
@@ -65,7 +65,7 @@
       if (this.shotsLeft > 0) {
         this.shotTimer -= dt;
         if (this.shotTimer <= 0) {
-          this.shotTimer = 0.14;
+          this.shotTimer = 0.04;
           this.shotsLeft -= 1;
           this.fireAimed(game, 3, 0.2);
         }
@@ -79,7 +79,7 @@
 
       if (pattern === "radial") {
         this.fireRadial(game, 14);
-        this.patternTimer = 1.9;
+        this.patternTimer = 0.9;
       } else if (pattern === "aimed") {
         this.shotsLeft = 3;
         this.shotTimer = 0;
