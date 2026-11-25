@@ -25,7 +25,7 @@
 
   /** All gameplay numbers live here so balancing happens in one place. */
   NV.TUNING = Object.freeze({
-    playerHp: 3,
+    playerHp: 5,
     playerRadius: 11,
     playerSpeed: 540,
     playerAccel: 3800,
@@ -36,12 +36,12 @@
     invulnTime: 1.5,
     fireDelayBase: 0.155,
     fireDelayRapid: 0.08,
-    bulletSpeed: 1000,
-    bulletDamage: 1,
+    bulletSpeed: 10000,
+    bulletDamage: 10,
 
-    spreadShotTime: 15,
-    rapidShotTime: 13,
-    maxShield: 3,
+    spreadShotTime: 150,
+    rapidShotTime: 130,
+    maxShield: 30,
 
     comboWindow: 2.8,
     comboPerStep: 4,

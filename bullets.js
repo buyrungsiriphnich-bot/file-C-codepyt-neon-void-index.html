@@ -15,7 +15,7 @@
       this.vx = options.vx || 0;
       this.vy = options.vy || 0;
       this.radius = options.radius || 4;
-      this.damage = options.damage || 1;
+      this.damage = options.damage || 10;
       this.color = options.color || NV.COLORS.cyan;
       this.friendly = Boolean(options.friendly);
       this.dead = false;

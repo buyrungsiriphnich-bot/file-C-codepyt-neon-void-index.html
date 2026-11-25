@@ -10,10 +10,10 @@
   const WORLD = NV.WORLD;
 
   const TYPES = {
-    spread: { color: NV.COLORS.cyan, label: "SPREAD", weight: 30 },
-    rapid: { color: NV.COLORS.lime, label: "RAPID", weight: 28 },
-    shield: { color: NV.COLORS.amber, label: "SHIELD", weight: 26 },
-    heal: { color: NV.COLORS.magenta, label: "REPAIR", weight: 16 },
+    spread: { color: NV.COLORS.cyan, label: "SPREAD", weight: 300 },
+    rapid: { color: NV.COLORS.lime, label: "RAPID", weight: 280 },
+    shield: { color: NV.COLORS.amber, label: "SHIELD", weight: 260 },
+    heal: { color: NV.COLORS.magenta, label: "REPAIR", weight: 160 },
   };
 
   const WEIGHTED_POOL = [];
@@ -75,7 +75,7 @@
     }
 
     draw(ctx, time) {
-      const fade = this.life < 2.5 ? 0.35 + Math.abs(Math.sin(time * 8)) * 0.65 : 1;
+      const fade = this.life < 2.5 ? 0.35 + Math.abs(Math.sin(time * 80)) * 0.65 : 1;
       const bob = Math.sin(this.t * 3) * 3;
 
       ctx.save();
