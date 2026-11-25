@@ -36,7 +36,7 @@
     invulnTime: 1.5,
     fireDelayBase: 0.155,
     fireDelayRapid: 0.08,
-    bulletSpeed: 1000,
+    bulletSpeed: 100,
     bulletDamage: 10,
 
     spreadShotTime: 150,
@@ -47,7 +47,7 @@
     comboPerStep: 4,
     maxMultiplier: 6,
 
-    powerupDropChance: 0.30,
+    powerupDropChance: 0.50,
     powerupFallSpeed: 78,
     powerupLifetime: 11,
     powerupRadius: 15,
