@@ -36,7 +36,7 @@
     invulnTime: 1.5,
     fireDelayBase: 0.155,
     fireDelayRapid: 0.08,
-    bulletSpeed: 100,
+    bulletSpeed: 700,
     bulletDamage: 10,
 
     spreadShotTime: 150,
