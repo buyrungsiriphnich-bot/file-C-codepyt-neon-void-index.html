@@ -128,7 +128,7 @@
     emitThrust(dt, game) {
       this.thrustTimer -= dt;
       if (this.thrustTimer > 0) return;
-      this.thrustTimer = 0.045;
+      this.thrustTimer = 0.45;
       game.effects.burst(this.x - Math.sin(this.tilt) * 16, this.y + 12, {
         count: 2,
         color: this.rapidTime > 0 ? NV.COLORS.lime : NV.COLORS.cyan,
