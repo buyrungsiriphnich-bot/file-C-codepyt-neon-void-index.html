@@ -148,7 +148,7 @@
       if (this.shield > 0) {
         this.shield -= 1;
         this.invuln = 0.9;
-        game.damageFlash = 0.45;
+        game.damageFlash = 0.05;
         game.audio.shieldBreak();
         game.effects.ring(this.x, this.y, { color: NV.COLORS.amber, to: 90, life: 0.5, width: 3 });
         game.effects.burst(this.x, this.y, { count: 18, color: NV.COLORS.amber, speed: 260, life: 0.5 });
